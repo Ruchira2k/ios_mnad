@@ -1,0 +1,10 @@
+//
+//  WeatherModel.swift
+//  CW2DummyProject
+//
+//  Created by Visal Rajapakse on 2022-04-02.
+//
+
+import Foundation
+
+// Model that holds and provides us data to display

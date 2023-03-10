@@ -13,9 +13,11 @@ struct AddNewPizzaView: View {
     @State private var ingredients: String = ""
     @State private var imageName: String = ""
     @State private var imageThumbnailName: String = ""
-    @State private var pizzaType: String = ""
-    @State private var pizzaTypes: Int = 0
+    @State private var pizzaType: String = PizzaType.meat.rawValue
+//    @State private var pizzaTypes: Int = 0
+    @State private var isFavorite: Bool = false
     
+    @ObservedObject var pizzaViewModel: PizzaViewModel
     @Environment(\.dismiss) var dismiss
     
     var body: some View {
@@ -40,35 +42,39 @@ struct AddNewPizzaView: View {
                     Text("Image Details")
                 }
                 
-                Picker("Pizza Type", selection: $pizzaTypes) {
-                    Text("🥩 Meat").tag(0)
-                    Text("🥗 Veggie").tag(1)
+                Picker("Pizza Type", selection: $pizzaType) {
+                    Text("🥩 Meat").tag(PizzaType.meat.rawValue)
+                    Text("🥗 Veggie").tag(PizzaType.veg.rawValue)
                 }
+                
+                Toggle("Favorite", isOn: $isFavorite)
+                
             }.navigationTitle("New Pizza").navigationBarTitleDisplayMode(.inline)
                 .toolbar {
                     ToolbarItem(placement: .navigationBarLeading) {
-                        Button {
+                        Button("Cancel") {
                             dismiss()
-                        } label: {
-                            Text("Cancel")
                         }
                     }
                     
                     ToolbarItem(placement: .navigationBarTrailing) {
-                        Button {
+                        Button("Save") {
+                            savePizza()
                             dismiss()
-                        } label: {
-                            Text("Save")
                         }
                     }
                 }
         }
         
     }
+    
+    func savePizza() {
+        pizzaViewModel.addPizzaData(name: name, ingredients: ingredients, imageName: imageName, thumbnailName: imageThumbnailName, pizzaType: pizzaType, isFavorite: isFavorite)
+    }
 }
 
 struct AddNewPizzaView_Previews: PreviewProvider {
     static var previews: some View {
-        AddNewPizzaView()
+        AddNewPizzaView(pizzaViewModel: PizzaViewModel())
     }
 }

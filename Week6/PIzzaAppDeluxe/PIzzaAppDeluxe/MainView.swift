@@ -11,7 +11,7 @@ struct MainView: View {
     
     @State var pizzaTypes: Int = 0
     @State private var isSheetShowing = false
-    @StateObject var pizzaViewModel: PizzaViewModel = PizzaViewModel()
+    @ObservedObject var pizzaViewModel: PizzaViewModel
     
     var body: some View {
         NavigationStack{
@@ -24,58 +24,57 @@ struct MainView: View {
                 .pickerStyle(.segmented)
                 List {
                     if pizzaTypes == 0 {
-                        ForEach(pizzaViewModel.pizzas) { pizza in
+                        ForEach(pizzaViewModel.savedPizzaData) { pizza in
                             NavigationLink {
-                                PizzaView(pizzaName: pizza.name, imageName: pizza.imageName, ingredients: pizza.ingredients)
+                                PizzaView(selectedPizza: pizza, pizzaViewModel: pizzaViewModel)
                             } label: {
                                 HStack {
-                                    Image("\(pizza.thumbnailName)")
+                                    Image("\(pizza.thumbnailName ?? "")")
                                         .resizable()
                                         .scaledToFit()
                                         .frame(height: 90)
                                         .cornerRadius(5)
-                                    Text("\(pizza.name)").padding(.leading, 10)
+                                    Text("\(pizza.name ?? "")").padding(.leading, 10)
                                 }
                             }
                             .listRowInsets(EdgeInsets(top: 8, leading: 15, bottom: 8, trailing: 20))
                         }
+                        .onDelete { index in
+                            pizzaViewModel.savedPizzaData.remove(atOffsets: index)
+                        }
                     } else if pizzaTypes == 1 {
-                        ForEach(pizzaViewModel.pizzas) { pizza in
-                            if pizza.type == PizzaType.meat {
+                        ForEach(pizzaViewModel.filterPizzaWithType(pizzaType: "meat")) { pizza in
                                 NavigationLink {
-                                    PizzaView(pizzaName: pizza.name, imageName: pizza.imageName, ingredients: pizza.ingredients)
+                                    PizzaView(selectedPizza: pizza, pizzaViewModel: pizzaViewModel)
                                 } label: {
                                     HStack {
-                                        Image("\(pizza.thumbnailName)")
+                                        Image("\(pizza.thumbnailName ?? "")")
                                             .resizable()
                                             .scaledToFit()
                                             .frame(height: 90)
                                             .cornerRadius(5)
-                                        Text("\(pizza.name)").padding(.leading, 10)
+                                        Text("\(pizza.name ?? "")").padding(.leading, 10)
                                     }
                                 }
                                 .listRowInsets(EdgeInsets(top: 8, leading: 15, bottom: 8, trailing: 20))
-                            }
-                            
+
                         }
                     } else {
-                        ForEach(pizzaViewModel.pizzas) { pizza in
-                            if pizza.type == PizzaType.veg {
+                        ForEach(pizzaViewModel.filterPizzaWithType(pizzaType: "veg")) { pizza in
                                 NavigationLink {
-                                    PizzaView(pizzaName: pizza.name, imageName: pizza.imageName, ingredients: pizza.ingredients)
+                                    PizzaView(selectedPizza: pizza, pizzaViewModel: pizzaViewModel)
                                 } label: {
                                     HStack {
-                                        Image("\(pizza.thumbnailName)")
+                                        Image("\(pizza.thumbnailName ?? "")")
                                             .resizable()
                                             .scaledToFit()
                                             .frame(height: 90)
                                             .cornerRadius(5)
-                                        Text("\(pizza.name)").padding(.leading, 10)
+                                        Text("\(pizza.name ?? "")").padding(.leading, 10)
                                     }
                                 }
                                 .listRowInsets(EdgeInsets(top: 8, leading: 15, bottom: 8, trailing: 20))
-                            }
-                            
+
                         }
                     }
                     
@@ -93,7 +92,7 @@ struct MainView: View {
                         }
                     }
                 }.sheet(isPresented: $isSheetShowing) {
-                    AddNewPizzaView()
+                    AddNewPizzaView(pizzaViewModel: pizzaViewModel)
                 }
         }
         
@@ -102,6 +101,6 @@ struct MainView: View {
 
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
-        MainView()
+        MainView(pizzaViewModel: PizzaViewModel())
     }
 }

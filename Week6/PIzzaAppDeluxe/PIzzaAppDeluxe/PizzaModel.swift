@@ -14,6 +14,7 @@ struct Pizza: Identifiable {
     let thumbnailName: String
     let ingredients: String
     let type: PizzaType
+    let isFavorite: Bool
 }
 
 enum PizzaType: String {

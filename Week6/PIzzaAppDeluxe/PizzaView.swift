@@ -13,16 +13,21 @@ struct PizzaView: View {
 //    var ingredients: String = ""
 //
 //    private var ingredientList = ingredients.components(separatedBy: ",")
-    
+    var selectedPizza: PizzaEntity
+    @ObservedObject var pizzaViewModel: PizzaViewModel
     var pizzaName: String = ""
     var imageName: String = ""
     var ingredients: String = ""
+    @State var isFavorite: Bool = true
     private var ingredientList: [String]
     
-    init(pizzaName: String, imageName: String, ingredients: String) {
-        self.pizzaName = pizzaName
-        self.imageName = imageName
-        self.ingredients = ingredients
+    init(selectedPizza: PizzaEntity, pizzaViewModel: PizzaViewModel) {
+        self.selectedPizza = selectedPizza
+        self.pizzaViewModel = pizzaViewModel
+        self.pizzaName = selectedPizza.name ?? ""
+        self.imageName = selectedPizza.imageName ?? ""
+        self.ingredients = selectedPizza.ingredients ?? ""
+        self.isFavorite = selectedPizza.isFavorite
         self.ingredientList = ingredients.components(separatedBy: ",")
     }
     
@@ -44,6 +49,8 @@ struct PizzaView: View {
                     } header: {
                         Text("Ingredients").font(.system(size: 20))
                     }
+                    
+                    Toggle("Favorite", isOn: $isFavorite)
                 }
                 
             }.navigationTitle(pizzaName)

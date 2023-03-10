@@ -9,14 +9,16 @@ import SwiftUI
 
 struct ContentView: View {
     
+    @StateObject var viewModel = PizzaViewModel()
+    
     var body: some View {
         TabView {
-            MainView().tabItem{
+            MainView(pizzaViewModel: viewModel).tabItem{
                 Label("PizzaList", systemImage: "list.dash")
                 
             }
             
-            FavoritesView().tabItem{
+            FavoritesView(pizzaViewModel: viewModel).tabItem{
                 Label("Favorites", systemImage: "star.fill")
             }
         }

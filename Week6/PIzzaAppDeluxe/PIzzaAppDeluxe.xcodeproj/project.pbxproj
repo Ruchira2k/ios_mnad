@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3026FDBC29BADAF80048948D /* PizzaDataContainer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3026FDBA29BADAF80048948D /* PizzaDataContainer.xcdatamodeld */; };
 		30BBF32929AF238B004AC39A /* PIzzaAppDeluxeApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30BBF32829AF238B004AC39A /* PIzzaAppDeluxeApp.swift */; };
 		30BBF32B29AF238B004AC39A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30BBF32A29AF238B004AC39A /* ContentView.swift */; };
 		30BBF32D29AF238C004AC39A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 30BBF32C29AF238C004AC39A /* Assets.xcassets */; };
@@ -22,6 +23,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3026FDBB29BADAF80048948D /* PizzaDataContainer.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PizzaDataContainer.xcdatamodel; sourceTree = "<group>"; };
 		30BBF32529AF238B004AC39A /* PIzzaAppDeluxe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PIzzaAppDeluxe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		30BBF32829AF238B004AC39A /* PIzzaAppDeluxeApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PIzzaAppDeluxeApp.swift; sourceTree = "<group>"; };
 		30BBF32A29AF238B004AC39A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -77,6 +79,7 @@
 				30BBF33829AF23FD004AC39A /* FavoritesView.swift */,
 				30BBF33A29AF2C20004AC39A /* AddNewPizzaView.swift */,
 				30BBF33C29AF2DAA004AC39A /* PizzaModel.swift */,
+				3026FDBA29BADAF80048948D /* PizzaDataContainer.xcdatamodeld */,
 				30BBF33E29B0B109004AC39A /* MockData.swift */,
 				30BBF34029B0B3AA004AC39A /* pizzas.json */,
 			);
@@ -162,6 +165,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3026FDBC29BADAF80048948D /* PizzaDataContainer.xcdatamodeld in Sources */,
 				30BBF33929AF23FD004AC39A /* FavoritesView.swift in Sources */,
 				30BBF34529B0C064004AC39A /* PizzaView.swift in Sources */,
 				30BBF34329B0B61A004AC39A /* PizzaViewModel.swift in Sources */,
@@ -371,6 +375,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		3026FDBA29BADAF80048948D /* PizzaDataContainer.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				3026FDBB29BADAF80048948D /* PizzaDataContainer.xcdatamodel */,
+			);
+			currentVersion = 3026FDBB29BADAF80048948D /* PizzaDataContainer.xcdatamodel */;
+			path = PizzaDataContainer.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 30BBF31D29AF238B004AC39A /* Project object */;
 }
